@@ -4,18 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ONLINEPETITE — Магазин одежды</title>
-  <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header class="site-header">
     <div class="container nav">
-      index.htmlONLINEPETITE</a>
+      <a href="">ONLINEPETITE</a>
 
       <nav class="nav-links">
-        <a #catalogКаталог></a>
-        <a href="#benefits">
-        <a href="cart.html" class="">
-          <span id="headerCartCount" class="cart-badge">0</span>
+        #catalogКаталог</a>
+        #benefitsПреимущества</a>
+        <a href="cart.html" class="cart">       <span id="headerCartCount" class="cart-badge">0</span>
         </a>
       </nav>
     </div>
@@ -27,13 +26,13 @@
         <span class="hero-label">Новая коллекция</span>
         <h1>Стильный онлайн-магазин одежды</h1>
         <p>
-          Выбирай одежду по типу, цвету, размеру и цене. Добавляй в корзину и
-          отправляй заказ на почту.
+          Выбирай одежду по типу, цвету, размеру и цене.
+          Добавляй в корзину и отправляй заказ на почту.
         </p>
 
         <div class="hero-actions">
-          #catalogСмотреть каталог</a>
-          cart.htmlПерейти в корзину</a>
+          <a href="#catalog">Каталог</a>
+          <a href="cart.html">Корзину</a>
         </div>
       </div>
 
@@ -59,7 +58,9 @@
           <span class="section-label">Каталог</span>
           <h2>Подбери свой образ</h2>
         </div>
-        <div class="section-note">Фильтруй по категории, цвету, размеру и цене</div>
+        <div class="section-note">
+          Фильтруй по категории, цвету, размеру и цене
+        </div>
       </div>
 
       <div class="filters-box">
@@ -109,7 +110,14 @@
           <label for="priceRange">
             Макс. цена: <span id="priceRangeValue">150000 ₸</span>
           </label>
-          <input id="priceRange" type="range" min="15000" max="150000" step="5000" value="150000" />
+          <input
+            id="priceRange"
+            type="range"
+            min="15000"
+            max="150000"
+            step="5000"
+            value="150000"
+          />
         </div>
 
         <div class="filter-actions">
@@ -157,6 +165,7 @@
 
   <div id="toast" class="toast"></div>
 
-  <script src="script.js"></script>
+<script src="products.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
