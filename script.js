@@ -132,7 +132,7 @@ function clearCart() {
 
 function initCatalogPage() {
   const productsGrid = document.getElementById("productsGrid");
-  if (!productsGrid) return;
+  if (!productsGrid || typeof PRODUCTS === "undefined") return;
 
   const searchInput = document.getElementById("searchInput");
   const categoryFilter = document.getElementById("categoryFilter");
@@ -167,16 +167,11 @@ function initCatalogPage() {
         product.name.toLowerCase().includes(state.search.toLowerCase()) ||
         product.description.toLowerCase().includes(state.search.toLowerCase());
 
-      const matchCategory =
-        state.category === "all" || product.category === state.category;
-
-      const matchSize =
-        state.size === "all" || product.sizes.includes(state.size);
-
+      const matchCategory = state.category === "all" || product.category === state.category;
+      const matchSize = state.size === "all" || product.sizes.includes(state.size);
       const matchColor =
         state.color === "all" ||
         product.colors.some((color) => color.name === state.color);
-
       const matchPrice = discounted <= state.maxPrice;
 
       return matchSearch && matchCategory && matchSize && matchColor && matchPrice;
@@ -444,26 +439,30 @@ function renderCartPage() {
   const shippingHint = document.getElementById("shippingHint");
   const checkoutBtn = document.getElementById("checkoutBtn");
 
-  summaryCount.textContent = summary.count;
-  summarySubtotal.textContent = formatPrice(summary.subtotal);
-  summaryDiscount.textContent = formatPrice(summary.discount);
-  summaryShipping.textContent = formatPrice(summary.shipping);
-  summaryTotal.textContent = formatPrice(summary.total);
+  if (summaryCount) summaryCount.textContent = summary.count;
+  if (summarySubtotal) summarySubtotal.textContent = formatPrice(summary.subtotal);
+  if (summaryDiscount) summaryDiscount.textContent = formatPrice(summary.discount);
+  if (summaryShipping) summaryShipping.textContent = formatPrice(summary.shipping);
+  if (summaryTotal) summaryTotal.textContent = formatPrice(summary.total);
 
-  if (summary.subtotal > 0 && summary.subtotal < FREE_SHIPPING_FROM && summary.shipping > 0) {
-    shippingHint.textContent = `До бесплатной доставки осталось ${formatPrice(FREE_SHIPPING_FROM - summary.subtotal)}`;
-  } else if (summary.subtotal >= FREE_SHIPPING_FROM || (summary.promo && summary.promo.code === "FREESHIP")) {
-    shippingHint.textContent = "У тебя бесплатная доставка 🎉";
-  } else {
-    shippingHint.textContent = "";
+  if (shippingHint) {
+    if (summary.subtotal > 0 && summary.subtotal < FREE_SHIPPING_FROM && summary.shipping > 0) {
+      shippingHint.textContent = `До бесплатной доставки осталось ${formatPrice(FREE_SHIPPING_FROM - summary.subtotal)}`;
+    } else if (summary.subtotal >= FREE_SHIPPING_FROM || (summary.promo && summary.promo.code === "FREESHIP")) {
+      shippingHint.textContent = "У тебя бесплатная доставка 🎉";
+    } else {
+      shippingHint.textContent = "";
+    }
   }
+
+  if (!checkoutBtn) return;
 
   if (cart.length === 0) {
     cartContainer.innerHTML = `
       <div class="empty-cart">
         <h3>Корзина пуста</h3>
         <p>Добавь товары из каталога, чтобы оформить заказ.</p>
-        <a href="index.html каталог</a>
+        <a hreftmlПерейти в каталог</a>
       </div>
     `;
     checkoutBtn.disabled = true;
@@ -489,14 +488,12 @@ function renderCartPage() {
 
             <div class="cart-item-actions">
               <div class="qty-control">
-                <button type="button" class="qty-btn" data-action="minusspan>
-                <button type="button" class  </div>
+                <button type="button" class="qty<span>${item.quantity}</span>
+                <button type="button"        </div>
 
               <strong class="line-total">${formatPrice(item.price * item.quantity)}</strong>
 
-              <emove
-                Удалить
-              </button>
+              <button type="button" class="remove-link     </button>
             </div>
           </article>
         `
@@ -538,59 +535,65 @@ function initCartPage() {
   const checkoutForm = document.getElementById("checkoutForm");
 
   const currentPromo = getPromo();
-  if (currentPromo) {
+  if (currentPromo && promoInput && promoMessage) {
     promoInput.value = currentPromo.code;
     promoMessage.textContent = `Промокод ${currentPromo.code} уже применён`;
     promoMessage.className = "promo-message success";
   }
 
-  applyPromoBtn.addEventListener("click", () => {
-    const code = promoInput.value.trim().toUpperCase();
+  if (applyPromoBtn) {
+    applyPromoBtn.addEventListener("click", () => {
+      const code = promoInput.value.trim().toUpperCase();
 
-    if (!code) {
-      clearPromo();
-      promoMessage.textContent = "Промокод очищен";
-      promoMessage.className = "promo-message";
+      if (!code) {
+        clearPromo();
+        promoMessage.textContent = "Промокод очищен";
+        promoMessage.className = "promo-message";
+        renderCartPage();
+        return;
+      }
+
+      if (code === "STYLE10") {
+        savePromo({ code: "STYLE10" });
+        promoMessage.textContent = "Промокод STYLE10 применён: скидка 10%";
+        promoMessage.className = "promo-message success";
+      } else if (code === "FREESHIP") {
+        savePromo({ code: "FREESHIP" });
+        promoMessage.textContent = "Промокод FREESHIP применён: доставка 0 ₸";
+        promoMessage.className = "promo-message success";
+      } else {
+        clearPromo();
+        promoMessage.textContent = "Промокод не найден";
+        promoMessage.className = "promo-message error";
+      }
+
       renderCartPage();
-      return;
-    }
+    });
+  }
 
-    if (code === "STYLE10") {
-      savePromo({ code: "STYLE10" });
-      promoMessage.textContent = "Промокод STYLE10 применён: скидка 10%";
-      promoMessage.className = "promo-message success";
-    } else if (code === "FREESHIP") {
-      savePromo({ code: "FREESHIP" });
-      promoMessage.textContent = "Промокод FREESHIP применён: доставка 0 ₸";
-      promoMessage.className = "promo-message success";
-    } else {
-      clearPromo();
-      promoMessage.textContent = "Промокод не найден";
-      promoMessage.className = "promo-message error";
-    }
+  if (clearCartBtn) {
+    clearCartBtn.addEventListener("click", () => {
+      clearCart();
+      showToast("Корзина очищена");
+    });
+  }
 
-    renderCartPage();
-  });
+  if (checkoutForm) {
+    checkoutForm.addEventListener("submit", (e) => {
+      const cart = getCart();
 
-  clearCartBtn.addEventListener("click", () => {
-    clearCart();
-    showToast("Корзина очищена");
-  });
+      if (cart.length === 0) {
+        e.preventDefault();
+        showToast("Корзина пустая");
+        return;
+      }
 
-  checkoutForm.addEventListener("submit", (e) => {
-    const cart = getCart();
-
-    if (cart.length === 0) {
-      e.preventDefault();
-      showToast("Корзина пустая");
-      return;
-    }
-
-    setTimeout(() => {
-      saveCart([]);
-      clearPromo();
-    }, 500);
-  });
+      setTimeout(() => {
+        saveCart([]);
+        clearPromo();
+      }, 500);
+    });
+  }
 
   renderCartPage();
 }
