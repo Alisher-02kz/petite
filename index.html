@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ONLINEPETITE — Магазин одежды</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container nav">
+    <a href="index.html"TE</a>
+
+    <nav class="nav-links">
+      <a href="#cataloga>
+      #benefitsПреимущества</a>
+      cart.html
+        Корзина
+        <span id="headerCartCount" class="cart-badge">0</span>
+      </a>
+    </nav>
+  </div>
+</header>
+
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="hero-label">Новая коллекция</span>
+        <h1>Стильный онлайн-магазин одежды</h1>
+        <p>
+          Выбирай одежду по типу, цвету, размеру и цене. Добавляй в корзину и отправляй заказ на почту.
+        </p>
+        <div class="hero-actions">
+          <a href="#catalog"аталог</a>
+          <a href="cart.html" class="btn btn-outlineiv>
+      </div>
+
+      <div class="hero-card">
+        <div class="hero-preview">
+          <div class="preview-box preview-box-1"></div>
+          <div class="preview-box preview-box-2"></div>
+          <div class="preview-box preview-box-3"></div>
+        </div>
+        <div class="hero-info">
+          <strong>Весенняя подборка</strong>
+          <span>Футболки · Худи · Куртки · Брюки</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="container page-content">
+    <section id="catalog" class="catalog-section">
+      <div class="section-head">
+        <div>
+          <span class="section-label">Каталог</span>
+          <h2>Подбери свой образ</h2>
+        </div>
+        <div class="section-note">Фильтруй по категории, цвету, размеру и цене</div>
+      </div>
+
+      <div class="filters-box">
+        <div class="filter-group">
+          <label for="searchInput">Поиск</label>
+          <input id="searchInput" type="text" placeholder="Например: худи" />
+        </div>
+
+        <div class="filter-group">
+          <label for="categoryFilter">Тип одежды</label>
+          <select id="categoryFilter">
+            <option value="all">Все категории</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="sizeFilter">Размер</label>
+          <select id="sizeFilter">
+            <option value="all">Все размеры</option>
+            <option value="XS">XS</option>
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+            <option value="XL">XL</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="colorFilter">Цвет</label>
+          <select id="colorFilter">
+            <option value="all">Все цвета</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="sortFilter">Сортировка</label>
+          <select id="sortFilter">
+            <option value="popular">Сначала популярные</option>
+            <option value="price-asc">Сначала дешевле</option>
+            <option value="price-desc">Сначала дороже</option>
+            <option value="new">Сначала новинки</option>
+            <option value="sale">Сначала скидки</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="priceRange">Макс. цена: <span id="priceRangeValue">150000 ₸</span></label>
+          <input id="priceRange" type="range" min="15000" max="150000" step="5000" value="150000" />
+        </div>
+
+        <div class="filter-actions">
+          <button id="resetFiltersBtn" class="btn btn-outline" type="button">Сбросить фильтры</button>
+        </div>
+      </div>
+
+      <div id="resultsInfo" class="results-info"></div>
+      <div id="productsGrid" class="products-grid"></div>
+    </section>
+
+    <section id="benefits" class="benefits-section">
+      <div class="section-head">
+        <div>
+          <span class="section-label">Почему мы</span>
+          <h2>Преимущества магазина</h2>
+        </div>
+      </div>
+
+      <div class="benefits-grid">
+        <article class="benefit-card">
+          <h3>Удобная фильтрация</h3>
+          <p>Быстро находи нужную одежду по типу, цвету, размеру и цене.</p>
+        </article>
+
+        <article class="benefit-card">
+          <h3>Выбор вариантов</h3>
+          <p>Выбирай цвет и размер прямо в карточке товара перед добавлением в корзину.</p>
+        </article>
+
+        <article class="benefit-card">
+          <h3>Отдельная корзина</h3>
+          <p>Все выбранные вещи собраны на отдельной странице с итоговой суммой заказа.</p>
+        </article>
+
+        <article class="benefit-card">
+          <h3>Отправка заказа на почту</h3>
+          <p>Оформление заказа без сложного backend — через форму и email.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+<div id="toast" class="toast"></div>
+
+<script src="products.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

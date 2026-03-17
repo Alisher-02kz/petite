@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Корзина — ONLINEPETITE</title>
+  <link rel="stylesheet" href="style.css">
+  <header class="site-header">
+    <div class="container nav">
+      <a href="index.html" class="      <nav class="nav-links">
+        index.htmlКаталог</a>
+        <a href="cart.html  Корзина
+          <span id="headerCartCount" class="cart-badge">0</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container cart-page">
+    <div class="section-head">
+      <div>
+        <span class="section-label">Корзина</span>
+        <h1>Твои выбранные товары</h1>
+      </div>
+      <a href="index.html"я в каталог</a>
+    </div>
+
+    <div class="cart-layout">
+      <section class="cart-items-panel">
+        <div id="cartPageItems" class="cart-items-list"></div>
+      </section>
+
+      <aside class="cart-summary-panel">
+        <div class="summary-card">
+          <h2>Итог заказа</h2>
+
+          <div class="promo-box">
+            <label for="promoInput">Промокод</label>
+            <div class="promo-row">
+              <input id="promoInput" type="text" placeholder="Например: STYLE10" />
+              <button id="applyPromoBtn" type="button" class="btn btn-outline">Применить</button>
+            </div>
+            <small class="promo-tip">Поддерживаются: <b>STYLE10</b>, <b>FREESHIP</b></small>
+            <div id="promoMessage" class="promo-message"></div>
+          </div>
+
+          <div class="summary-list">
+            <div class="summary-line">
+              <span>Товаров</span>
+              <strong id="summaryCount">0</strong>
+            </div>
+            <div class="summary-line">
+              <span>Сумма</span>
+              <strong id="summarySubtotal">0 ₸</strong>
+            </div>
+            <div class="summary-line">
+              <span>Скидка</span>
+              <strong id="summaryDiscount">0 ₸</strong>
+            </div>
+            <div class="summary-line">
+              <span>Доставка</span>
+              <strong id="summaryShipping">0 ₸</strong>
+            </div>
+            <div class="summary-line total">
+              <span>Итого</span>
+              <strong id="summaryTotal">0 ₸</strong>
+            </div>
+          </div>
+
+          <div id="shippingHint" class="shipping-hint"></div>
+
+          <button id="clearCartBtn" type="button" class="btn btn-outline btn-full">
+            Очистить корзину
+          </button>
+        </div>
+
+        <div class="summary-card">
+          <h2>Оформление заказа</h2>
+
+          <form
+            id="checkoutForm"
+            action="https://formsubmit.co/alisherabdulla    method="POST"
+          >
+            <input type="hidden" name="_subject" value="Новый заказ с ONLINEPETITE" />
+            <input type="hidden" name="_template" value="table" />
+            <input
+              type="hidden"
+              name="_next"
+              value="https://alisher-0zkz.github.io/onlinepetite/thanks.html"
+            />
+            <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
+
+            <div class="form-group">
+              <label for="customerName">Имя</label>
+              <input id="customerName" name="Имя" type="text" required />
+            </div>
+
+            <div class="form-group">
+              <label for="customerPhone">Телефон</label>
+              <input id="customerPhone" name="Телефон" type="text" required />
+            </div>
+
+            <div class="form-group">
+              <label for="customerEmail">Email</label>
+              <input id="customerEmail" name="Email" type="email" required />
+            </div>
+
+            <div class="form-group">
+              <label for="customerAddress">Адрес доставки</label>
+              <textarea id="customerAddress" name="Адрес доставки" rows="3" required></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="customerComment">Комментарий</label>
+              <textarea id="customerComment" name="Комментарий" rows="3" placeholder="Например: позвонить за 30 минут"></textarea>
+            </div>
+
+            <textarea id="orderDataField" name="Состав заказа" hidden></textarea>
+            <input id="orderTotalField" name="Итоговая сумма" type="hidden" />
+            <input id="orderCountField" name="Количество товаров" type="hidden" />
+            <input id="orderPromoField" name="Промокод" type="hidden" />
+
+            <button id="checkoutBtn" type="submit" class="btn btn-primary btn-full">
+              Отправить заказ
+            </button>
+          </form>
+
+          <p class="checkout-note">
+            После первой тестовой отправки FormSubmit попросит подтвердить email.
+          </p>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
